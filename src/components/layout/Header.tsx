@@ -28,15 +28,26 @@ export function Header() {
   }, [mobileOpen]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-        scrolled || mobileOpen
-          ? "bg-white/95 shadow-[0_4px_30px_rgba(6,27,70,0.08)] backdrop-blur-md"
-          : "bg-gradient-to-b from-black/35 to-transparent"
-      )}
-    >
-      <Container className="flex h-20 items-center justify-between">
+    <>
+      <button
+        type="button"
+        aria-hidden="true"
+        tabIndex={-1}
+        onClick={() => setMobileOpen(false)}
+        className={cn(
+          "fixed inset-x-0 top-20 bottom-0 z-40 bg-navy/40 backdrop-blur-sm transition-opacity duration-300 lg:hidden",
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        )}
+      />
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          scrolled || mobileOpen
+            ? "bg-white/95 shadow-[0_4px_30px_rgba(6,27,70,0.08)] backdrop-blur-md"
+            : "bg-gradient-to-b from-black/35 to-transparent"
+        )}
+      >
+        <Container className="relative z-10 flex h-20 items-center justify-between">
         <a href="#inicio" className="flex items-center gap-3">
           <Image
             src="/logo.jpg"
@@ -100,11 +111,11 @@ export function Header() {
       <div
         id="mobile-menu"
         className={cn(
-          "overflow-hidden bg-white transition-[max-height,opacity] duration-400 ease-in-out lg:hidden",
-          mobileOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
+          "relative z-10 overflow-hidden bg-white shadow-[0_20px_40px_rgba(6,27,70,0.12)] transition-[max-height,opacity] duration-400 ease-in-out lg:hidden",
+          mobileOpen ? "max-h-[34rem] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <Container className="flex flex-col gap-1 pb-8 pt-2">
+        <Container className="flex flex-col gap-1 pb-12 pt-2">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -125,6 +136,7 @@ export function Header() {
           </Button>
         </Container>
       </div>
-    </header>
+      </header>
+    </>
   );
 }

@@ -49,7 +49,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-[92vh] w-full items-center overflow-hidden bg-navy"
+      className="relative isolate flex min-h-[92vh] w-full items-center overflow-hidden bg-navy"
     >
       <div
         className="absolute inset-0 -z-10 bg-gradient-to-b from-[#bcd9ff] via-[#8fb9e8] to-[#061b46] transition-opacity duration-1000"

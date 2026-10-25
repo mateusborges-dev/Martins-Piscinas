@@ -10,20 +10,25 @@ export interface Service {
   };
 }
 
+export interface ServiceCategory {
+  id: string;
+  tabLabel: string;
+  title: string;
+  description: string;
+  highlights: string[];
+  image: {
+    src: string;
+    alt: string;
+  };
+  /** True only for services the company has actually confirmed it offers today. */
+  confirmed: boolean;
+}
+
 export interface Testimonial {
   id: string;
   name: string;
   summary: string;
   source: "google" | "whatsapp" | "instagram";
-}
-
-export interface GalleryImage {
-  id: string;
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  illustrative?: boolean;
 }
 
 export interface BusinessHoursEntry {
@@ -37,8 +42,11 @@ export interface NavLink {
   href: string;
 }
 
+export type StatIcon = "trophy" | "pool" | "smile" | "certified";
+
 export interface Stat {
   id: string;
+  icon: StatIcon;
   value: string;
   label: string;
 }
@@ -67,4 +75,17 @@ export interface BeforeAfterPair {
   before: { src: string; alt: string };
   after: { src: string; alt: string };
   caption?: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image: { src: string; alt: string; width: number; height: number };
+  /** Only set once the client confirms the real location of the project. */
+  location?: string;
+  /** Extra photos of the same project, shown in the detail view. */
+  gallery?: { src: string; alt: string }[];
+  /** True for stock/illustrative photography — never a real executed job. */
+  illustrative: boolean;
 }

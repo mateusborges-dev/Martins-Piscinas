@@ -2,15 +2,17 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "reac
 import { cn } from "@/lib/utils";
 
 const baseStyles =
-  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-aqua disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:opacity-50 disabled:pointer-events-none";
 
 const variants = {
   primary:
-    "bg-amber text-navy shadow-[0_8px_30px_rgba(255,138,0,0.35)] hover:shadow-[0_12px_40px_rgba(255,138,0,0.45)] hover:-translate-y-0.5",
+    "bg-primary text-navy shadow-[0_8px_30px_rgba(0,191,239,0.35)] hover:bg-primary-hover hover:shadow-[0_12px_40px_rgba(0,191,239,0.45)] hover:-translate-y-0.5",
   secondary:
-    "bg-white/10 text-white border border-white/30 backdrop-blur-sm hover:bg-white/20 hover:-translate-y-0.5",
+    "bg-white/10 text-white border border-primary/70 backdrop-blur-sm hover:bg-primary hover:border-primary hover:text-navy hover:-translate-y-0.5",
   outline:
-    "bg-transparent text-navy border border-navy/20 hover:border-navy hover:bg-navy hover:text-white",
+    "bg-transparent text-navy border border-navy/20 hover:border-primary hover:bg-primary hover:text-navy",
+  whatsapp:
+    "bg-whatsapp text-white shadow-[0_8px_24px_rgba(37,211,102,0.3)] hover:bg-whatsapp-hover hover:shadow-[0_12px_32px_rgba(37,211,102,0.4)] hover:-translate-y-0.5",
 };
 
 type Variant = keyof typeof variants;

@@ -3,10 +3,10 @@ import type {
   BusinessHoursEntry,
   Differentiator,
   FaqItem,
-  GalleryImage,
   NavLink,
   ProcessStep,
   Service,
+  ServiceCategory,
   Stat,
   Testimonial,
 } from "@/types";
@@ -56,7 +56,6 @@ export const businessHours: BusinessHoursEntry[] = [
 
 export const navLinks: NavLink[] = [
   { label: "Início", href: "#inicio" },
-  { label: "Sobre nós", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
   { label: "Projetos", href: "#projetos" },
   { label: "Avaliações", href: "#avaliacoes" },
@@ -86,6 +85,117 @@ export const services: Service[] = [
   },
 ];
 
+// As seis categorias abaixo compõem a vitrine interativa de serviços.
+// Apenas "construcao" e "manutencao" têm confirmed: true — são os únicos
+// serviços que a Martins Piscinas efetivamente oferece hoje. As demais
+// aparecem como interface demonstrativa, com CTA de "consultar
+// disponibilidade" em vez de "solicitar orçamento", e nenhuma garantia,
+// certificação ou técnica específica é atribuída à empresa.
+export const serviceCategories: ServiceCategory[] = [
+  {
+    id: "construcao",
+    tabLabel: "Construção",
+    title: "Construção de piscinas",
+    description:
+      "Transforme seu espaço com uma piscina planejada para proporcionar lazer, conforto e momentos especiais.",
+    highlights: [
+      "Planejamento alinhado ao espaço disponível",
+      "Acompanhamento próximo em cada etapa da obra",
+      "Atenção aos detalhes estruturais e de acabamento",
+    ],
+    image: {
+      src: "/images/servicos/construcao.webp",
+      alt: "Piscina residencial moderna em fase de construção",
+    },
+    confirmed: true,
+  },
+  {
+    id: "renovacao",
+    tabLabel: "Renovação",
+    title: "Renovação de piscinas",
+    description:
+      "Conheça possibilidades para renovar a aparência e a experiência de utilização de uma piscina.",
+    highlights: [
+      "Atualização de revestimentos e acabamentos",
+      "Modernização da aparência geral da piscina",
+      "Avaliação da estrutura existente",
+    ],
+    image: {
+      src: "/images/servicos/renovacao.webp",
+      alt: "Piscina revitalizada com revestimento moderno",
+    },
+    confirmed: false,
+  },
+  {
+    id: "manutencao",
+    tabLabel: "Manutenção",
+    title: "Manutenção de piscinas",
+    description:
+      "Cuidados para manter sua piscina em boas condições de utilização e conservação.",
+    highlights: [
+      "Cuidado contínuo com a qualidade da água",
+      "Acompanhamento regular dos equipamentos",
+      "Suporte para manter a piscina sempre pronta para uso",
+    ],
+    image: {
+      src: "/images/servicos/manutencao.webp",
+      alt: "Profissional realizando manutenção em piscina residencial",
+    },
+    confirmed: true,
+  },
+  {
+    id: "cuidados-agua",
+    tabLabel: "Cuidados com a água",
+    title: "Cuidados com a água",
+    description:
+      "Conheça a importância do acompanhamento da qualidade da água e dos cuidados adequados.",
+    highlights: [
+      "Acompanhamento do equilíbrio químico da água",
+      "Prevenção de problemas como turbidez e algas",
+      "Orientações para manter a água própria para uso",
+    ],
+    image: {
+      src: "/images/servicos/cuidados-agua.webp",
+      alt: "Água de piscina cristalina com equipamento de análise",
+    },
+    confirmed: false,
+  },
+  {
+    id: "reforma",
+    tabLabel: "Reforma",
+    title: "Reforma de piscinas",
+    description:
+      "Explore possibilidades de modernização de revestimentos, acabamentos e estrutura.",
+    highlights: [
+      "Modernização de revestimentos e estrutura",
+      "Atualização de acabamentos e equipamentos",
+      "Avaliação das condições atuais da piscina",
+    ],
+    image: {
+      src: "/images/servicos/reforma.webp",
+      alt: "Piscina passando por reforma arquitetônica",
+    },
+    confirmed: false,
+  },
+  {
+    id: "inspecao",
+    tabLabel: "Inspeção",
+    title: "Inspeção de piscinas",
+    description:
+      "Conheça a importância da avaliação das condições da piscina e de seus equipamentos.",
+    highlights: [
+      "Avaliação das condições gerais da piscina",
+      "Verificação de equipamentos e instalações",
+      "Identificação de pontos de atenção",
+    ],
+    image: {
+      src: "/images/servicos/inspecao.webp",
+      alt: "Técnico verificando equipamentos de piscina",
+    },
+    confirmed: false,
+  },
+];
+
 export const testimonials: Testimonial[] = [
   {
     id: "jaqueline-lima",
@@ -103,44 +213,36 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-export const galleryImages: GalleryImage[] = [
+// PENDENTE DE CONFIRMAÇÃO — os números e a certificação abaixo foram
+// fornecidos como referência visual para a faixa de estatísticas, mas ainda
+// NÃO foram validados pela Martins Piscinas. Confirmar com o cliente antes
+// de publicar em produção; não apresentar como dados verificados até lá.
+export const stats: Stat[] = [
   {
-    id: "g1",
-    src: "/images/pool-sunset-building.jpg",
-    alt: "Piscina residencial com iluminação de fim de tarde",
-    width: 2000,
-    height: 1333,
-    illustrative: true,
+    id: "anos-experiencia",
+    icon: "trophy",
+    value: "10+",
+    label: "Anos de experiência",
   },
   {
-    id: "g2",
-    src: "/images/pool-aerial-trees.jpg",
-    alt: "Vista aérea de piscina cercada por paisagismo",
-    width: 2000,
-    height: 1333,
-    illustrative: true,
+    id: "servicos-manutencao",
+    icon: "pool",
+    value: "Mais de 1.500",
+    label: "Serviços de manutenção de piscinas",
   },
   {
-    id: "g3",
-    src: "/images/pool-modern-house.jpg",
-    alt: "Piscina integrada a residência de arquitetura contemporânea",
-    width: 2000,
-    height: 1333,
-    illustrative: true,
+    id: "satisfacao-cliente",
+    icon: "smile",
+    value: "98%",
+    label: "Satisfação do Cliente",
   },
   {
-    id: "g4",
-    src: "/images/pool-topdown.jpg",
-    alt: "Piscina vista de cima com bordas bem definidas",
-    width: 2000,
-    height: 1333,
-    illustrative: true,
+    id: "tecnicos-certificados",
+    icon: "certified",
+    value: "Certificado",
+    label: "Técnicos Especializados",
   },
 ];
-
-// Sem números reais confirmados pela empresa ainda — a seção de estatísticas
-// só deve ser exibida quando este array for preenchido com dados verdadeiros.
-export const stats: Stat[] = [];
 
 export const differentiators: Differentiator[] = [
   {
@@ -233,9 +335,23 @@ export const faqs: FaqItem[] = [
   },
 ];
 
-// Nenhuma foto real de antes/depois foi fornecida ainda — o componente de
-// slider existe e está pronto para uso, mas a seção só deve ser publicada na
-// página quando este array receber fotos reais de projetos da empresa.
-export const beforeAfterPairs: BeforeAfterPair[] = [];
+// Par ilustrativo gerado por IA (não é uma obra real executada pela
+// empresa) — por isso a seção exibe a legenda "Imagens ilustrativas
+// geradas por IA." de forma visível, nunca apresentando o resultado como
+// um projeto real concluído.
+export const beforeAfterPairs: BeforeAfterPair[] = [
+  {
+    id: "transformacao-ilustrativa",
+    before: {
+      src: "/images/piscina-antes.png",
+      alt: "Área externa simples antes de uma transformação ilustrativa de piscina",
+    },
+    after: {
+      src: "/images/piscina-depois.png",
+      alt: "Piscina extraordinária após uma transformação ilustrativa do mesmo espaço",
+    },
+    caption: "Imagens ilustrativas geradas por IA.",
+  },
+];
 
 export const siteUrl = "https://martinspiscinasaguazul.com.br";

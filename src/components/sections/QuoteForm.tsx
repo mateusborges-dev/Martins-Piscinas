@@ -7,6 +7,7 @@ import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { RevealOnScroll } from "@/components/ui/RevealOnScroll";
+import { Button } from "@/components/ui/Button";
 import { buildQuoteMessage } from "@/lib/whatsapp";
 import { company } from "@/data/company";
 
@@ -150,13 +151,10 @@ export function QuoteForm() {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="mt-7 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-4 text-sm font-semibold text-white transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(37,211,102,0.4)]"
-            >
+            <Button type="submit" variant="whatsapp" className="mt-7 w-full">
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
               Enviar pelo WhatsApp
-            </button>
+            </Button>
 
             <p role="status" aria-live="polite" className="mt-3 text-center text-xs text-navy/50">
               {isSubmitSuccessful

@@ -96,6 +96,7 @@ export function ContactLocation() {
             </div>
 
             <Button
+              variant="whatsapp"
               href={buildWhatsAppUrl(defaultWhatsAppMessage)}
               target="_blank"
               rel="noopener noreferrer"

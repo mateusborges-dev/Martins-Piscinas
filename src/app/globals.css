@@ -7,7 +7,13 @@
   --color-aqua: #00c8f8;
   --color-white: #ffffff;
   --color-mist: #f3f7fa;
-  --color-amber: #ff8a00;
+
+  /* Identidade azul padrão para todos os botões do site, exceto os
+     botões de WhatsApp (ação explícita), que permanecem verdes. */
+  --color-primary: #00bfef;
+  --color-primary-hover: #009ac7;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #128c7e;
 
   --background: var(--color-white);
   --foreground: var(--color-navy);
@@ -19,7 +25,10 @@
   --color-blue: var(--color-blue);
   --color-aqua: var(--color-aqua);
   --color-mist: var(--color-mist);
-  --color-amber: var(--color-amber);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-whatsapp: var(--color-whatsapp);
+  --color-whatsapp-hover: var(--color-whatsapp-hover);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);

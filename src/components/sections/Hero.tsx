@@ -1,31 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import gsap from "gsap";
 import { Button } from "@/components/ui/Button";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { company } from "@/data/company";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
-
-const PoolCanvas = dynamic(
-  () => import("@/components/three/PoolCanvas").then((mod) => mod.PoolCanvas),
-  { ssr: false }
-);
+import { cn } from "@/lib/utils";
 
 const heroMessage = `Olá! Vim pelo site da ${company.shortName} e gostaria de solicitar um orçamento para construção/manutenção de piscina.`;
 
 export function Hero() {
-  const [sceneReady, setSceneReady] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const actionsRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    if (!sceneReady) return;
-
     const targets = [titleRef.current, subtitleRef.current, actionsRef.current].filter(
       Boolean
     );
@@ -40,34 +36,60 @@ export function Hero() {
       { opacity: 0, y: 28 },
       { opacity: 1, y: 0, duration: 0.9, stagger: 0.18, ease: "power3.out" }
     );
-  }, [sceneReady, reducedMotion]);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const video = videoRef.current;
+    if (!video) return;
+    // Some mobile browsers ignore the autoPlay attribute until play() is
+    // called from a user-gesture-free effect after mount.
+    video.play().catch(() => {
+      // Autoplay blocked — the poster image underneath stays visible.
+    });
+  }, [reducedMotion]);
 
   const scrollToServices = () => {
     document.querySelector("#servicos")?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const showVideo = !reducedMotion && !videoError;
 
   return (
     <section
       id="inicio"
       className="relative isolate flex min-h-[92vh] w-full items-center overflow-hidden bg-navy"
     >
-      <div
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-[#bcd9ff] via-[#8fb9e8] to-[#061b46] transition-opacity duration-1000"
-        style={{ opacity: sceneReady ? 1 : 0.6 }}
-        aria-hidden="true"
+      <Image
+        src="/images/pool-sunset-building.jpg"
+        alt="Piscina residencial de luxo ao entardecer, imagem ilustrativa"
+        fill
+        priority
+        className="absolute inset-0 -z-10 object-cover"
       />
 
-      <PoolCanvas onReady={() => setSceneReady(true)} />
+      {showVideo && (
+        <video
+          ref={videoRef}
+          className={cn(
+            "absolute inset-0 -z-10 h-full w-full object-cover transition-opacity duration-700",
+            videoReady ? "opacity-100" : "opacity-0"
+          )}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          onCanPlay={() => setVideoReady(true)}
+          onError={() => setVideoError(true)}
+          aria-hidden="true"
+        >
+          <source src="/video/pool-hero.mp4" type="video/mp4" />
+        </video>
+      )}
 
       <div
         className="absolute inset-0 -z-[5] bg-gradient-to-t from-navy via-navy/30 to-transparent"
-        aria-hidden="true"
-      />
-
-      <div
-        className={`absolute inset-0 -z-[4] bg-navy transition-opacity duration-700 ${
-          sceneReady ? "opacity-0" : "opacity-100"
-        }`}
         aria-hidden="true"
       />
 

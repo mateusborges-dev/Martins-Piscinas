@@ -4,15 +4,17 @@ import { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { MoveHorizontal } from "lucide-react";
 import type { BeforeAfterPair } from "@/types";
+import { cn } from "@/lib/utils";
 
 interface BeforeAfterSliderProps {
   pair: BeforeAfterPair;
+  className?: string;
 }
 
-export function BeforeAfterSlider({ pair }: BeforeAfterSliderProps) {
+export function BeforeAfterSlider({ pair, className }: BeforeAfterSliderProps) {
   const [position, setPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const draggingRef = useRef(false);
 
   const updateFromClientX = useCallback((clientX: number) => {
     const el = containerRef.current;
@@ -23,18 +25,17 @@ export function BeforeAfterSlider({ pair }: BeforeAfterSliderProps) {
   }, []);
 
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    draggingRef.current = true;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setIsDragging(true);
     updateFromClientX(event.clientX);
   };
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!draggingRef.current) return;
+    if (!isDragging) return;
     updateFromClientX(event.clientX);
   };
 
-  const stopDragging = () => {
-    draggingRef.current = false;
-  };
+  const stopDragging = () => setIsDragging(false);
 
   return (
     <div
@@ -48,12 +49,15 @@ export function BeforeAfterSlider({ pair }: BeforeAfterSliderProps) {
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={stopDragging}
-      onPointerLeave={stopDragging}
+      onPointerCancel={stopDragging}
       onKeyDown={(event) => {
         if (event.key === "ArrowLeft") setPosition((p) => Math.max(0, p - 5));
         if (event.key === "ArrowRight") setPosition((p) => Math.min(100, p + 5));
       }}
-      className="relative aspect-[4/3] w-full cursor-ew-resize touch-none select-none overflow-hidden rounded-[2rem] shadow-[0_30px_60px_rgba(6,27,70,0.15)] sm:aspect-[16/10]"
+      className={cn(
+        "relative cursor-ew-resize touch-none select-none overflow-hidden rounded-[20px] shadow-[0_30px_60px_rgba(6,27,70,0.15)]",
+        className ?? "aspect-[4/3] w-full sm:aspect-[16/10]"
+      )}
     >
       <Image
         src={pair.after.src}
@@ -63,7 +67,10 @@ export function BeforeAfterSlider({ pair }: BeforeAfterSliderProps) {
         className="object-cover"
       />
       <div
-        className="absolute inset-0 overflow-hidden"
+        className={cn(
+          "absolute inset-0 overflow-hidden",
+          !isDragging && "transition-[clip-path] duration-200 ease-out"
+        )}
         style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
       >
         <Image
@@ -76,10 +83,13 @@ export function BeforeAfterSlider({ pair }: BeforeAfterSliderProps) {
       </div>
 
       <div
-        className="absolute inset-y-0 z-10 w-0.5 bg-white"
+        className={cn(
+          "absolute inset-y-0 z-10 w-[3px] bg-white shadow-[0_0_12px_rgba(0,0,0,0.25)]",
+          !isDragging && "transition-[left] duration-200 ease-out"
+        )}
         style={{ left: `${position}%` }}
       >
-        <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-lg">
+        <span className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-navy shadow-lg">
           <MoveHorizontal className="h-5 w-5" aria-hidden="true" />
         </span>
       </div>

@@ -2,11 +2,11 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { Stats } from "@/components/sections/Stats";
-import { About } from "@/components/sections/About";
+import { BeforeAfter } from "@/components/sections/BeforeAfter";
 import { Services } from "@/components/sections/Services";
 import { Differentiators } from "@/components/sections/Differentiators";
 import { Cinematic } from "@/components/sections/Cinematic";
-import { Gallery } from "@/components/sections/Gallery";
+import { Projects } from "@/components/sections/Projects";
 import { Process } from "@/components/sections/Process";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
@@ -21,11 +21,11 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <Stats />
-        <About />
+        <BeforeAfter />
         <Services />
         <Differentiators />
         <Cinematic />
-        <Gallery />
+        <Projects />
         <Process />
         <Testimonials />
         <FAQ />
